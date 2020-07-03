@@ -30,7 +30,60 @@ export class PagesMenu {
 
     const menu: NbMenuItem[] = [
       {
-        title: 'FEATURES',
+        title: 'ADMIN VIEW',
+        group: true,
+      },
+      {
+        title: 'Users',
+        link: '/pages/tables/smart-table',
+      },
+      {
+        title: 'Payments',
+        link: '/pages/tables/smart-table',
+      },
+      {
+        title: 'Facilities',
+        link: '/pages/tables/smart-table',
+      },
+      {
+        title: 'Reports',
+        icon: 'layout-outline',
+        children: [
+          {
+            title: 'Money In',
+            link: '/pages/tables/smart-table',
+          },
+          {
+            title: 'Money Out',
+            link: '/pages/tables/smart-table',
+          },
+          {
+            title: 'Due',
+            link: '/pages/tables/smart-table',
+          },
+          {
+            title: 'Facilities',
+            link: '/pages/tables/smart-table',
+          },],
+      },
+      {
+        title: 'USER VIEW',
+        group: true,
+      },
+      {
+        title: 'Payments',
+        link: '/pages/tables/smart-table',
+      },
+      {
+        title: 'Facilities',
+        link: '/pages/tables/smart-table',
+      },
+      {
+        title: 'Smart Table',
+        link: '/pages/tables/smart-table',
+      },
+      {
+        title: 'SITE FEATURES',
         group: true,
       },
       {
