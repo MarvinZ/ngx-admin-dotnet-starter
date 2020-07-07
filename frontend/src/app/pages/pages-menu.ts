@@ -35,7 +35,7 @@ export class PagesMenu {
       },
       {
         title: 'Users',
-        link: '/pages/tables/smart-table',
+        link: '/pages/members/members',
       },
       {
         title: 'Payments',

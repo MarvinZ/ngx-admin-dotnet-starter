@@ -19,7 +19,7 @@ using Common.Entities;
 namespace Common.WebApi.Controllers
 {
     [RoutePrefix("users")]
-    [Authorize(Roles = Roles.Admin)]
+    [Authorize(Roles = Roles.Admin)] 
     public class UsersController : BaseApiController
     {
         protected readonly IUserService userService;
@@ -37,6 +37,16 @@ namespace Common.WebApi.Controllers
         {
             var user = await userService.GetById(id);
             return Ok(user);
+        }
+
+        // custom function added by me to test the plumbing
+
+        [HttpGet]
+        [Route("all")]
+        public async Task<IHttpActionResult> All()
+        {
+            var users = await userService.GetAllUsers();
+            return Ok(users);
         }
 
         [HttpGet]

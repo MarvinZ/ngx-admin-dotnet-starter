@@ -8,6 +8,7 @@ using Common.DTO;
 using Common.Entities;
 using Common.Services.Infrastructure;
 using Common.Utils;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Common.Services
@@ -49,6 +50,14 @@ namespace Common.Services
             return user.MapTo<UserDTO>();
         }
 
+        // custom function added by me to test the plumbing
+
+        public async Task<List<UserDTO>> GetAllUsers(bool includeDeleted = false)
+        {
+            var user = await userRepository.GetUsers(Session, includeDeleted);
+            return user.MapTo<List<UserDTO>>();
+        }
+        
         public async Task<UserDTO> GetByLogin(string login, bool includeDeleted = false)
         {
             var user = await userRepository.GetByLogin(login, Session, includeDeleted);

@@ -6,6 +6,7 @@
 
 using Common.Entities;
 using Common.Services.Infrastructure;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -64,6 +65,20 @@ namespace Common.DataAccess.EntityFramework
                     .Include(u => u.UserRoles.Select(r => r.Role))
                     .Include(u => u.Settings)
                     .FirstOrDefaultAsync();
+            }
+        }
+
+        // custom function added by me to test the plumbing
+        public async Task<IList<User>> GetUsers(ContextSession session, bool includeDeleted = false)
+        {
+            using (var context = GetContext(session))
+            {
+                return await GetEntities(context, includeDeleted)
+                    // .Where(obj => obj.Email == email)
+                    .Include(u => u.UserRoles.Select(r => r.Role))
+                    .Include(u => u.Settings)
+                   // .FirstOrDefaultAsync();
+                   .ToListAsync();
             }
         }
     }

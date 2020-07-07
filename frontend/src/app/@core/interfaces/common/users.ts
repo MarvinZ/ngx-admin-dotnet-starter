@@ -33,6 +33,7 @@ export abstract class UserData {
   abstract getCurrentUser(): Observable<User>;
   abstract list(pageNumber: number, pageSize: number): Observable<User[]>;
   abstract get(id: number): Observable<User>;
+  abstract getAllUsers(): Observable<any[]>;
   abstract update(user: User): Observable<User>;
   abstract updateCurrent(user: User): Observable<User>;
   abstract create(user: User): Observable<User>;

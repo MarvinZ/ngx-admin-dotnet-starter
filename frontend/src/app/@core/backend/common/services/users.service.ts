@@ -15,49 +15,56 @@ import { switchMap, map } from 'rxjs/operators';
 @Injectable()
 export class UsersService extends UserData {
 
-  constructor(private api: UsersApi, private authService: NbAuthService) {
-    super();
-  }
+    constructor(private api: UsersApi, private authService: NbAuthService) {
+        super();
+    }
 
-  get gridDataSource(): DataSource {
-    return this.api.usersDataSource;
-  }
+    get gridDataSource(): DataSource {
+        return this.api.usersDataSource;
+    }
 
-  list(pageNumber: number = 1, pageSize: number = 10): Observable<User[]> {
-    return this.api.list(pageNumber, pageSize);
-  }
+    list(pageNumber: number = 1, pageSize: number = 10): Observable<User[]> {
+        return this.api.list(pageNumber, pageSize);
+    }
 
-  getCurrentUser(): Observable<User> {
-    return this.authService.isAuthenticated()
-      .pipe(
-        switchMap(authenticated => {
-          return authenticated ? this.api.getCurrent() : of(null);
-        }),
-        map(u => {
-          if (u && !u.setting) {
-            u.setting = {};
-          }
-        return u;
-      }));
-  }
+    // custom function added by me to test the plumbing
 
-  get(id: number): Observable<User> {
-    return this.api.get(id);
-  }
+    getAllUsers(): Observable<any> {
+        return this.api.getAllUsers();
+    }
 
-  create(user: any): Observable<User> {
-    return this.api.add(user);
-  }
 
-  update(user: any): Observable<User> {
-    return this.api.update(user);
-  }
+    getCurrentUser(): Observable<User> {
+        return this.authService.isAuthenticated()
+            .pipe(
+                switchMap(authenticated => {
+                    return authenticated ? this.api.getCurrent() : of(null);
+                }),
+                map(u => {
+                    if (u && !u.setting) {
+                        u.setting = {};
+                    }
+                    return u;
+                }));
+    }
 
-  updateCurrent(user: any): Observable<User> {
-    return this.api.updateCurrent(user);
-  }
+    get(id: number): Observable<User> {
+        return this.api.get(id);
+    }
 
-  delete(id: number): Observable<boolean> {
-    return this.api.delete(id);
-  }
+    create(user: any): Observable<User> {
+        return this.api.add(user);
+    }
+
+    update(user: any): Observable<User> {
+        return this.api.update(user);
+    }
+
+    updateCurrent(user: any): Observable<User> {
+        return this.api.updateCurrent(user);
+    }
+
+    delete(id: number): Observable<boolean> {
+        return this.api.delete(id);
+    }
 }

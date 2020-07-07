@@ -32,6 +32,16 @@ export class UsersApi {
         return { ...item, picture };
       })));
   }
+        // custom function added by me to test the plumbing
+
+getAllUsers(): Observable<any> {
+  return this.api.get(`${this.apiController}/all`)
+    .pipe(map(data => {
+      const picture = `${this.api.apiUrl}/${this.apiController}/${data.id}/photo`;
+      return { ...data, picture };
+    }));
+}
+
 
   getCurrent(): Observable<any> {
     return this.api.get(`${this.apiController}/current`)
