@@ -67,12 +67,15 @@ namespace Common.WebApi.Identity
                 string.IsNullOrEmpty(signUpDto.Email) ||
                 string.IsNullOrEmpty(signUpDto.Password) ||
                 string.IsNullOrEmpty(signUpDto.ConfirmPassword) ||
-                string.IsNullOrEmpty(signUpDto.FullName) ||
+                //string.IsNullOrEmpty(signUpDto.FullName) ||
+                //string.IsNullOrEmpty(signUpDto.Login) ||
+                string.IsNullOrEmpty(signUpDto.Name) ||
+                string.IsNullOrEmpty(signUpDto.Lastname) ||
                 signUpDto.Password != signUpDto.ConfirmPassword
             )
                 return AuthResult<Token>.UnvalidatedResult;
 
-            var newUser = new TUser { Login = signUpDto.FullName, Email = signUpDto.Email };
+            var newUser = new TUser { Login = signUpDto.Email, Email = signUpDto.Email, FirstName = signUpDto.Name, LastName = signUpDto.Name };
 
             var result = await userManager.CreateAsync(newUser, signUpDto.Password);
 

@@ -17,11 +17,18 @@ import { EMAIL_PATTERN } from '../constants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxRegisterComponent implements OnInit {
-  minLoginLength: number = this.getConfigValue(('forms.validation.fullName.minLength'));
-  maxLoginLength: number = this.getConfigValue(('forms.validation.fullName.maxLength'));
+  minLoginLength: number = this.getConfigValue(('forms.validation.login.minLength'));
+  maxLoginLength: number = this.getConfigValue(('forms.validation.login.maxLength'));
+  minNameLength: number = this.getConfigValue(('forms.validation.name.minLength'));
+  maxNameLength: number = this.getConfigValue(('forms.validation.name.maxLength'));
+  minLastnameLength: number = this.getConfigValue(('forms.validation.lastname.minLength'));
+  maxLastnameLength: number = this.getConfigValue(('forms.validation.lastname.maxLength'));
   minLength: number = this.getConfigValue('forms.validation.password.minLength');
   maxLength: number = this.getConfigValue('forms.validation.password.maxLength');
   isFullNameRequired: boolean = this.getConfigValue('forms.validation.fullName.required');
+  isLoginRequired: boolean = this.getConfigValue('forms.validation.login.required');
+  isNameRequired: boolean = this.getConfigValue('forms.validation.name.required');
+  isLastnameRequired: boolean = this.getConfigValue('forms.validation.lastname.required');
   isEmailRequired: boolean = this.getConfigValue('forms.validation.email.required');
   isPasswordRequired: boolean = this.getConfigValue('forms.validation.password.required');
   redirectDelay: number = this.getConfigValue('forms.register.redirectDelay');
@@ -42,18 +49,32 @@ export class NgxRegisterComponent implements OnInit {
     protected router: Router) {
   }
 
-  get login() { return this.registerForm.get('fullName'); }
+  // get login() { return this.registerForm.get('login'); }
+  get name() { return this.registerForm.get('name'); }
+  get lastname() { return this.registerForm.get('lastname'); }
   get email() { return this.registerForm.get('email'); }
   get password() { return this.registerForm.get('password'); }
   get confirmPassword() { return this.registerForm.get('confirmPassword'); }
   get terms() { return this.registerForm.get('terms'); }
 
   ngOnInit(): void {
-    const loginValidators = [
-      Validators.minLength(this.minLoginLength),
-      Validators.maxLength(this.maxLoginLength),
+    // const loginValidators = [
+    //   Validators.minLength(this.minLoginLength),
+    //   Validators.maxLength(this.maxLoginLength),
+    // ];
+    // this.isLoginRequired && loginValidators.push(Validators.required);
+
+    const nameValidators = [
+      Validators.minLength(this.minNameLength),
+      Validators.maxLength(this.maxNameLength),
     ];
-    this.isFullNameRequired && loginValidators.push(Validators.required);
+    this.isNameRequired && nameValidators.push(Validators.required);
+
+    const lastnameValidators = [
+      Validators.minLength(this.minLastnameLength),
+      Validators.maxLength(this.maxLastnameLength),
+    ];
+    this.isLastnameRequired && lastnameValidators.push(Validators.required);
 
     const emailValidators = [
       Validators.pattern(EMAIL_PATTERN),
@@ -67,7 +88,9 @@ export class NgxRegisterComponent implements OnInit {
     this.isPasswordRequired && passwordValidators.push(Validators.required);
 
     this.registerForm = this.fb.group({
-      fullName: this.fb.control('', [...loginValidators]),
+      // login: this.fb.control('', [...loginValidators]),
+      name: this.fb.control('', [...nameValidators]),
+      lastname: this.fb.control('', [...lastnameValidators]),
       email: this.fb.control('', [...emailValidators]),
       password: this.fb.control('', [...passwordValidators]),
       confirmPassword: this.fb.control('', [...passwordValidators]),

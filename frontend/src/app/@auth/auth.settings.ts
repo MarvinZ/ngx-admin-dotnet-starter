@@ -1,3 +1,4 @@
+import { DialogNamePromptComponent } from './../pages/modal-overlays/dialog/dialog-name-prompt/dialog-name-prompt.component';
 /*
  * Copyright (c) Akveo 2019. All Rights Reserved.
  * Licensed under the Single Application / Multi Application License.
@@ -70,8 +71,23 @@ export const authOptions = {
     validation: {
       fullName: {
         required: true,
-        minLength: 6,
-        maxLength: 20,
+        minLength: 2,
+        maxLength: 100,
+      },
+      login: {
+        required: true,
+        minLength: 2,
+        maxLength: 100,
+      },
+      name: {
+        required: true,
+        minLength: 2,
+        maxLength: 100,
+      },
+      lastname: {
+        required: true,
+        minLength: 2,
+        maxLength: 100,
       },
     },
   },

@@ -21,14 +21,14 @@
 </nb-alert>
 
 <div [formGroup]="registerForm" aria-labelledby="title">
-  <div class="form-control-group">
+  <!-- <div class="form-control-group">
     <label for="input-name">Login:</label>
     <input  nbInput
             autofocus
             fullWidth
             fieldSize="large"
             id="input-name"
-            formControlName="fullName"
+            formControlName="login"
             [status]="login.dirty ? (login.invalid  ? 'danger' : 'success') : ''"
             [attr.aria-invalid]="login.invalid && login.touched ? true : null"
             placeholder="Login">
@@ -38,6 +38,46 @@
                             [minLength]="minLoginLength"
                             [maxLength]="maxLoginLength"
                             [showRequired]="login?.errors?.required && login.touched">
+    </ngx-validation-message>
+  </div> -->
+
+  <div class="form-control-group">
+    <label for="input-name">Name:</label>
+    <input  nbInput
+            autofocus
+            fullWidth
+            fieldSize="large"
+            id="input-name"
+            formControlName="name"
+            [status]="name.dirty ? (name.invalid  ? 'danger' : 'success') : ''"
+            [attr.aria-invalid]="name.invalid && name.touched ? true : null"
+            placeholder="Name">
+    <ngx-validation-message label="Name"
+                            [showMinLength]="name?.hasError('minlength') && name.touched"
+                            [showMaxLength]="name?.hasError('maxlength') && name.touched"
+                            [minLength]="minNameLength"
+                            [maxLength]="maxNameLength"
+                            [showRequired]="name?.errors?.required && name.touched">
+    </ngx-validation-message>
+  </div>
+
+  <div class="form-control-group">
+    <label for="input-name">Lastname:</label>
+    <input  nbInput
+            autofocus
+            fullWidth
+            fieldSize="large"
+            id="input-name"
+            formControlName="lastname"
+            [status]="lastname.dirty ? (lastname.invalid  ? 'danger' : 'success') : ''"
+            [attr.aria-invalid]="lastname.invalid && lastname.touched ? true : null"
+            placeholder="Lastname">
+    <ngx-validation-message label="lastname"
+                            [showMinLength]="lastname?.hasError('minlength') && login.touched"
+                            [showMaxLength]="lastname?.hasError('maxlength') && login.touched"
+                            [minLength]="minLastNameLength"
+                            [maxLength]="maxLastNameLength"
+                            [showRequired]="lastname?.errors?.required && lastname.touched">
     </ngx-validation-message>
   </div>
 

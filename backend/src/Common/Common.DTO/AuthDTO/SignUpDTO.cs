@@ -9,6 +9,9 @@ namespace Common.DTO
     public class SignUpDTO : LoginDTO
     {
         public string FullName { get; set; }
+        public string Login { get; set; }
+        public string Name { get; set; }
+        public string Lastname { get; set; }
         public string ConfirmPassword { get; set; }
     }
 }
